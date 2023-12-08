@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Management System</title>
+    <style>
+       
+        .status-bar {
+            background-color: #4caf50;
+            color: white;
+            display: flex;
+            justify-content: space-between; /* Center the course name text */
+            padding: 1px 1px;
+            text-align: center;
+        }
+        
+        
+
+    .back-button {
+        background-color: #333;
+        color: white;
+        border: none;
+        padding: 4px 8px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .back-button:hover {
+        background-color: #555;
+    }
+   
+	.notification-icon {
+            position: fixed;
+            bottom: 50px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: url('file:///C:/PerfLogs/PerfLogs/message icon.gif') no-repeat center center;
+            background-size: cover;
+            cursor: pointer;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+	 /* Hover effect for the notification icon */
+        .notification-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.8);
+        }
+	.course-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .course-box {
+            width: 200px;
+            height: 240px;
+            padding: 20px;
+            margin: 10px;
+            border: 1px solid #333;
+            text-align: center;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .course-box img {
+            max-width: 80px;
+            max-height: 80px;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+        .course-name {
+            margin: 10px 0;
+            font-weight: bold;
+            font-size: 16px;
+            color: #4caf50;
+        }
+        .professor-name {
+            font-weight: bold;
+            font-size: 14px;
+            color: #ff9800;
+        }
+        .start-button {
+            background-color: #4caf50;
+            color: white;
+            padding: 8px 5px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.5s ease;
+	    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5); 
+        }
+	.start-button:hover {
+            background-color: #55a050; 
+        }
+
+	.header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+        }
+        .logo1 {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            height: 50px;
+        }
+        .logo2 {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            height: 50px;
+        }
+	
+	    .banner {
+            width: 100%;
+            height: 130px;
+            background: url('file:///C:/PerfLogs/PerfLogs/lms.png') no-repeat center center;
+            background-size: contain;
+        }
+
+        .logo {
+            text-align: center;
+            margin-top: 90px;
+        }
+
+        .logo img {
+            width: auto;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .login-form {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .input-field,
+        .password-input {
+            width: 30%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .signin-button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-bottom: 40px; /* Increased space between button and last image */
+        }
+
+        .forgot-password {
+            margin-bottom: 20px;
+            color: #3498db;
+            text-decoration: underline;
+            cursor: pointer;
+            display: block;
+        }
+
+        .bottom-image {
+            width: 100%;
+            height: 100px;
+            background: url('file:///C:/PerfLogs/PerfLogs/last%20image.jpeg') no-repeat center center;
+            background-size: contain;
+        }
+        .videos-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .videos-titles-container {
+            flex: 1;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+        }
+
+        .videos-player-container {
+            flex: 2;
+            background-color: #3498db;
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+        }
+                        /* Add this CSS to remove underline and specify hover effect for video titles */
+            /* Modify the styles for video titles, containers, and footer */
+        .videos-titles-container a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold; /* Make the video titles bold */
+            margin-bottom: 13px; /* Add space between video titles */
+            display: block; /* Make video titles block elements to apply margin-bottom */
+            transition: color 0.3s ease;
+        }
+
+        .videos-titles-container a:hover {
+            color: #2980b9;
+            cursor: pointer;
+        }
+
+        .videos-container {
+            margin-top: 20px; /* Add space between the video container and the header */
+            margin-bottom: 60px; /* Add space between the video container and other content */
+        }
+
+        .footer {
+            margin-top: 40px; /* Add space between the footer and the content above it */
+        }
+        /* Modify the styles for video titles */
+.videos-titles-container div a {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold; /* Make the video titles bold */
+    font-size: 14px; /* Set the font size of video titles */
+    margin-bottom: 13px; /* Add space between video titles */
+    display: block; /* Make video titles block elements to apply margin-bottom */
+    transition: color 0.3s ease;
+}
+
+/* Style for non-clickable date */
+.videos-titles-container div span {
+    font-weight: bold; /* Remove bold font for dates */
+    font-size: 18px; /* Set the font size of dates */
+    color: #000000; /* Set the color of dates */
+}
+
+
+    </style>
+</head>
+
+<body>
+    <div class="banner"></div>
+    <div class="logo">
+        <img src="file:///C:/PerfLogs/PerfLogs/Logo-New.png" alt="Logo New">
+    </div>
+    <div class="login-form">
+        <div class="input-box">
+            <input type="text" class="input-field" placeholder="Student ID" id="studentId">
+        </div>
+        <div class="input-box">
+            <input type="password" class="password-input" placeholder="Password" id="password">
+        </div>
+        <a href="#" class="forgot-password">Forgot Password?</a>
+        <div class="input-box">
+            <button class="signin-button" id="signInButton">Sign In</button>
+        </div>
+    </div>
+    <div class="bottom-image"></div>
+
+    <script>
+        function getFirstCourseData() {
+            var videoTitles = [
+                "Foundations of Computing: An Introduction to the Digital World",
+                "Exploring Computing: A Comprehensive Introduction for Beginners",
+                "From Bits to Bytes: An Essential Guide to Computing Fundamentals",
+                "Computing Unveiled: A Beginner's Journey into the Digital Realm",
+                "Code and Beyond: Navigating the World of Computing",
+                "The Essence of Computing: A Beginner's Guide to the Digital Landscape"
+            ];
+
+            var embedCodes = [
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/3JdMUhffS_Q?si=nvKIHDPX7awUB1jB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/IzMzbO2Jhj0?si=9oz4oeWxCpWPJM-K" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/NJpFmTzgQ4I?si=vvno0aWHtu2PNkZd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/ictoStW6Dmw?si=-FQg5T0t17eY5Wo9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/Xuev061m5hk?si=u1gD2gfYVB6cxR_1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/Bxl9QxSyu20?si=tUgzTzo0F3GWWvLR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+            ];
+
+            return {
+                videoTitles: videoTitles,
+                embedCodes: embedCodes
+            };
+        }
+        function getSecondCourseData() {
+            var videoTitles = [
+                "Foundations of Language",
+                "The Art of Writing: Techniques and Styles",
+                "Classic Literature and Its Impact",
+                "Language in Context: Culture and Communication",
+                "Diverse Genres: From Poetry to Prose",
+                "Digital Communication and Modern Language"
+            ];
+
+            var embedCodes = [
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/BMMJ7eU7heM?si=MNSH_ZKCXvnm0Ukl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/CqmChcNQZtk?si=frnlTm7_sdVCw-PT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/sP3Gw7m7cJ4?si=JyYv1hxfo7pXfibX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/Q_H-Z_oG-00?si=FB_FhIej7LfKfl-V" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/h6v5k2f4yK8?si=x2J944_VGOs5DakC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/DQJf66P_KKw?si=_UNIw1w_HDEX0gXx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+            ];
+
+            return {
+                videoTitles: videoTitles,
+                embedCodes: embedCodes
+            };
+        }
+        function getThirdCourseData() {
+            var videoTitles = [
+                "Fundamental Concepts of Mathematics",
+                "Algebraic Expressions and Equations",
+                "Geometry: Shapes, Angles, and Proportions",
+                "Calculus: The Study of Change",
+                "Statistics and Probability: Analyzing Data",
+                "Applied Mathematics: Real-World Problem Solving"
+            ];
+
+            var embedCodes = [
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/pJsDeDIOVnY?si=dK9PRPcPBb80IojQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/A4OJOsXBFAs?si=ca2PrW8_0uhNBzKP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/aSE4pr7V26M?si=kVD66HKjVp5bINqs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/aSE4pr7V26M?si=tkxE3nUhLRump_1M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/cEiv97tWVAo?si=74YM9t3HeVXxJYZ_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/7YWuR-omXUg?si=DFtSN7mtaVcc3id7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+            ];
+
+            return {
+                videoTitles: videoTitles,
+                embedCodes: embedCodes
+            };
+        }
+        function getFifthCourseData() {
+            var videoTitles = [
+                "Introduction to Sociology",
+                "Social Institutions and Structures",
+                "Social Inequality: Race, Class, Gender",
+                "Cultural Diversity and Globalization",
+                "Social Change and Movements",
+                "Research Methods in Sociology"
+            ];
+
+            var embedCodes = [
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/fhv132hWbLU?si=k0liYW0S5bxi2gRm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/Jdu3aDcDHyE?si=pAPMJ-6DhPZIGkXP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/Jdu3aDcDHyE?si=bKJx9-sXnZ2UOjwv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/fhv132hWbLU?si=k0liYW0S5bxi2gRm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/Jdu3aDcDHyE?si=pAPMJ-6DhPZIGkXP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/Jdu3aDcDHyE?si=bKJx9-sXnZ2UOjwv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+            ];
+
+            return {
+                videoTitles: videoTitles,
+                embedCodes: embedCodes
+            };
+        }
+        function getSixthCourseData() {
+            var videoTitles = [
+                "Introduction to Political Science",
+                "Political Theory and Ideologies",
+                "Comparative Politics: Systems and Structures",
+                "International Relations and Global Politics",
+                "Public Administration and Policy Making",
+                "Political Research and Methodology"
+            ];
+
+            var embedCodes = [
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/XvB-mU8yUxg?si=Vvt6t06wS_KR8OZm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/Zh3Yz3PiXZw?si=IX7kCk0USryxHf_c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/x1HuzXXiWEo?si=5Bw-DexVTM6XOBqf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/XvB-mU8yUxg?si=Vvt6t06wS_KR8OZm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/Zh3Yz3PiXZw?si=IX7kCk0USryxHf_c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/x1HuzXXiWEo?si=5Bw-DexVTM6XOBqf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+            ];
+
+            return {
+                videoTitles: videoTitles,
+                embedCodes: embedCodes
+            };
+        }
+        function getFourthCourseData() {
+            var videoTitles = [
+                "Fundamental Concepts of Mathematics",
+                "Algebraic Expressions and Equations",
+                "Geometry: Shapes, Angles, and Proportions",
+                "Calculus: The Study of Change",
+                "Statistics and Probability: Analyzing Data",
+                "Applied Mathematics: Real-World Problem Solving"
+            ];
+
+            var embedCodes = [
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/pJsDeDIOVnY?si=dK9PRPcPBb80IojQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/A4OJOsXBFAs?si=ca2PrW8_0uhNBzKP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/aSE4pr7V26M?si=kVD66HKjVp5bINqs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/aSE4pr7V26M?si=tkxE3nUhLRump_1M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/cEiv97tWVAo?si=74YM9t3HeVXxJYZ_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+                '<iframe width="560" height="315" src="https://www.youtube.com/embed/7YWuR-omXUg?si=DFtSN7mtaVcc3id7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+            ];
+
+            return {
+                videoTitles: videoTitles,
+                embedCodes: embedCodes
+            };
+        }
+        function createStatusBar(courseName) {
+            // Create status bar container
+            var statusBar = document.createElement('div');
+            statusBar.className = 'status-bar';
+            
+            // Create back button
+            var backButton = document.createElement('button');
+            backButton.className = 'back-button';
+            backButton.textContent = 'Back';
+            backButton.addEventListener('click', showHomePage); // Attach click event listener to the back button
+        
+            // Create course name element
+            var courseNameElement = document.createElement('div');
+            courseNameElement.className = 'courseName';
+            courseNameElement.textContent = courseName; // Set the course name
+            courseNameElement.style.textAlign = 'center'; // Center align the course name
+        
+            // Append elements to the status bar container
+            statusBar.appendChild(backButton);
+            statusBar.appendChild(courseNameElement);
+        
+            // Append status bar to the body
+            document.body.appendChild(statusBar);
+        }
+        
+
+function addBackButton() {
+    // Create back button
+    var backButton = document.createElement('button');
+    backButton.className = 'back-button';
+    backButton.textContent = 'Back';
+    backButton.addEventListener('click', showHomePage); // Attach click event listener to the back button
+
+    // Append back button to the body
+    document.body.appendChild(backButton);
+}
+
+function createHeader() {
+    // Create header with specified styles and logos
+    var header = document.createElement('div');
+    header.className = 'header';
+    header.innerHTML = '<h1>Learning Management System</h1>';
+
+    var logo1 = document.createElement('img');
+    logo1.src = 'VU_Logo.png'; // Specify the correct path to your first logo image
+    logo1.className = 'logo1';
+    header.appendChild(logo1);
+
+    var logo2 = document.createElement('img');
+    logo2.src = 'Logo-New.png'; // Specify the correct path to your second logo image
+    logo2.className = 'logo2';
+    header.appendChild(logo2);
+
+    var profilePic = document.createElement('img');
+    profilePic.src = 'C:/PerfLogs/PerfLogs/final.jpg'; // Specify the correct path to your profile picture
+    
+    profilePic.style.width = '23px'; // Set the width of the profile picture
+    profilePic.style.height = '23px'; // Set the height of the profile picture
+    profilePic.style.borderRadius = '50%'; // Make the profile picture circular
+    profilePic.style.position = 'absolute';
+    profilePic.style.bottom = '10px';
+    profilePic.style.right = '120px';
+    profilePic.alt = 'Mudasir Arshad';
+    profilePic.title = 'Mudasir Arshad';
+
+    var nameElement = document.createElement('p');
+    nameElement.textContent = 'Mudasir Arshad';
+    nameElement.style.textAlign = 'center';
+    nameElement.style.fontSize = '14px'; // Set the font size of the name
+    nameElement.style.position = 'absolute';
+    nameElement.style.bottom = '-2px';
+    nameElement.style.right = '20px'; // Adjust the right distance from the corner
+
+    header.appendChild(profilePic);
+    header.appendChild(nameElement);
+
+    document.body.appendChild(header);
+}
+
+
+        function createFooter() {
+            // Create and display the footer
+            var footer = document.createElement('div');
+            footer.style.textAlign = 'center';
+            footer.style.position = 'fixed';
+            footer.style.bottom = '0';
+            footer.style.width = '100%';
+            footer.style.background = '#555';
+            footer.style.color = 'white';
+            footer.style.padding = '5px';
+            footer.innerHTML = '&copy; 2023 Learning Management System. All rights reserved.';
+            document.body.appendChild(footer);
+        }
+        function notificationIcon() {
+            // Create notification icon
+            var notificationIcon = document.createElement('div');
+            notificationIcon.className = 'notification-icon';
+            document.body.appendChild(notificationIcon);
+        
+            // Show message when notification icon is clicked
+            notificationIcon.addEventListener('click', function() {
+                alert('You have no new message now.'); // Display a simple message
+            });
+        }
+        
+        
+        function createCourseContainer() {
+            // Create course container
+            var courseContainer = document.createElement('div');
+            courseContainer.className = 'course-container';
+        
+            // Course data
+            var courses = [
+                { code: 'CS101', name: 'Introduction to Computing', professor: 'Dr. Ahmed Ali', image: 'CS101.jpeg' },
+                { code: 'ENG101', name: 'English Comprehension', professor: 'Dr. Fatima Khan', image: 'ENG101.jpeg' },
+                { code: 'MTH302', name: 'Business Mathematics & Statistics', professor: 'Prof. Zahid Ahmed', image: 'MTH302.jpeg' },
+                { code: 'SOC101', name: 'Introduction to Sociology', professor: 'Dr. Abraham', image: 'SOC101.jpeg' },
+                { code: 'PAK301', name: 'Pakistan Studies', professor: 'Prof. Ali Hassan', image: 'PAK301.jpeg' },
+                { code: 'ISL202', name: 'Islamic Studies', professor: 'Dr. Ahmed Malik', image: 'ISL202.jpeg' }
+            ];
+        
+            // Add courses to the container
+            for (var i = 0; i < courses.length; i++) {
+                var courseBox = document.createElement('div');
+                courseBox.className = 'course-box';
+        
+                var courseImage = document.createElement('img');
+                courseImage.src = 'file:///C:/PerfLogs/PerfLogs/' + courses[i].image;
+                courseImage.alt = courses[i].name + ' Image';
+                courseImage.className = 'course-image';
+                courseBox.appendChild(courseImage);
+        
+                var courseName = document.createElement('div');
+                courseName.className = 'course-name';
+                courseName.textContent = courses[i].code + ' - ' + courses[i].name;
+                courseBox.appendChild(courseName);
+        
+                var professorName = document.createElement('div');
+                professorName.className = 'professor-name';
+                professorName.textContent = 'Professor: ' + courses[i].professor;
+                courseBox.appendChild(professorName);
+        
+                var startButton = document.createElement('button');
+                startButton.className = 'start-button';
+                startButton.textContent = 'Start';
+                courseBox.appendChild(startButton);
+        
+                courseContainer.appendChild(courseBox);
+            }
+        
+            document.body.appendChild(courseContainer);
+        }
+        function createVideosContainers() {
+            // Create videos containers (Phase 3.1)
+            var videosContainer = document.createElement('div');
+            videosContainer.className = 'videos-container';
+        
+            var videosTitlesContainer = document.createElement('div');
+            videosTitlesContainer.className = 'videos-titles-container';
+            videosTitlesContainer.innerHTML = '<h2 style="font-weight: bold;">Video Titles</h2>';
+            videosContainer.appendChild(videosTitlesContainer);
+        
+            var videosPlayerContainer = document.createElement('div');
+            videosPlayerContainer.className = 'videos-player-container';
+            // Add video player content here dynamically
+            videosContainer.appendChild(videosPlayerContainer);
+        
+            document.body.appendChild(videosContainer);
+        }
+        function populateVideos(videoTitles, embedCodes) {
+            var videosTitlesContainer = document.querySelector('.videos-titles-container');
+            var videosPlayerContainer = document.querySelector('.videos-player-container');
+        
+            // Get the dates for the current week (Monday to Saturday)
+            var startDate = getMonday(new Date());
+            var endDate = new Date(startDate);
+            endDate.setDate(startDate.getDate() + 5); // Saturday of the current week
+        
+            // Populate video titles as clickable links with formatted dates
+            for (var i = 0; i < videoTitles.length; i++) {
+                var titleElement = document.createElement('div');
+                var videoLink = document.createElement('a');
+                videoLink.href = '#';  // You can set a unique identifier or the actual video URL here
+        
+                // Format date to 'dd/mmm/yyyy' (e.g., 16/Oct/2023)
+                var currentDate = new Date(startDate);
+                currentDate.setDate(startDate.getDate() + i);
+                var formattedDate = `${currentDate.toLocaleString('en-us', { month: 'short' })}/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+        
+                var dateElement = document.createElement('span');
+                dateElement.textContent = formattedDate + '  ';
+                titleElement.appendChild(dateElement);
+        
+                videoLink.textContent = videoTitles[i];
+                videoLink.dataset.videoIndex = i;  // Store the index to identify which video to play
+                videoLink.addEventListener('click', playVideo);
+        
+                titleElement.appendChild(videoLink);
+                videosTitlesContainer.appendChild(titleElement);
+            }
+        
+            // Function to get the Monday of the current week
+            function getMonday(date) {
+                var day = date.getDay();
+                var diff = date.getDate() - day + (day === 0 ? -6 : 1); // Adjust when day is Sunday (day 0)
+                return new Date(date.setDate(diff));
+            }
+        
+            // Function to play the selected video
+            function playVideo(event) {
+                event.preventDefault();
+                var videoIndex = event.target.dataset.videoIndex;
+                videosPlayerContainer.innerHTML = embedCodes[videoIndex];
+            }
+        }
+        
+        
+        function setupCourseButtonListeners() {
+            // Find the "Start" button for CS101 by its class name
+            var startButtonCS101 = document.querySelector('.course-box:first-child .start-button');
+            startButtonCS101.addEventListener('click', function() {
+                firstcourse();
+            });
+        
+            // Find the "Start" button for ENG101 by its class name
+            var startButtonENG101 = document.querySelectorAll('.course-box')[1].querySelector('.start-button');
+            startButtonENG101.addEventListener('click', function() {
+                secondcourse();
+            });
+        
+            // Find the "Start" button for MTH302 by its class name
+            var startButtonMTH302 = document.querySelectorAll('.course-box')[2].querySelector('.start-button');
+            startButtonMTH302.addEventListener('click', function() {
+                thirdcourse();
+            });
+        
+            // Find the "Start" button for SOC101 by its class name
+            var startButtonSOC101 = document.querySelectorAll('.course-box')[3].querySelector('.start-button');
+            startButtonSOC101.addEventListener('click', function() {
+                fourthcourse();
+            });
+        
+            // Find the "Start" button for PAK301 by its class name
+            var startButtonPAK301 = document.querySelectorAll('.course-box')[4].querySelector('.start-button');
+            startButtonPAK301.addEventListener('click', function() {
+                fifthcourse();
+            });
+        
+            // Find the "Start" button for ISL202 by its class name
+            var startButtonISL202 = document.querySelectorAll('.course-box')[5].querySelector('.start-button');
+            startButtonISL202.addEventListener('click', function() {
+                sixthcourse();
+            });
+        }
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // You can also use 'auto' for instant scrolling
+            });
+        }
+        function firstcourse() {
+            document.body.innerHTML = '';
+            createHeader();
+            createStatusBar(); 
+            createFooter();
+            notificationIcon();
+            createVideosContainers();
+            var firstCourseData = getFirstCourseData(); // Get data for the first course
+            var videoTitles = firstCourseData.videoTitles; // Use the data
+            var embedCodes = firstCourseData.embedCodes; // Use the data
+            populateVideos(videoTitles, embedCodes);  // Populate videos with the retrieved data
+            scrollToTop();
+           
+        }
+        function secondcourse() {
+            document.body.innerHTML = '';
+            createHeader();
+            createStatusBar();  // You can pass the course name as an argument if needed
+            createFooter();
+            notificationIcon();
+            createVideosContainers();
+            var secondCourseData = getSecondCourseData(); // Get data for the second course
+            var videoTitles = secondCourseData.videoTitles; // Use the data
+            var embedCodes = secondCourseData.embedCodes; // Use the data
+            populateVideos(videoTitles, embedCodes);  // Populate videos with the retrieved data
+            scrollToTop();
+        }
+        
+        function thirdcourse() {
+            document.body.innerHTML = '';
+            createHeader();
+            createStatusBar();  // You can pass the course name as an argument if needed
+            createFooter();
+            notificationIcon();
+            createVideosContainers();
+            var thirdCourseData = getThirdCourseData(); // Get data for the third course
+            var videoTitles = thirdCourseData.videoTitles; // Use the data
+            var embedCodes = thirdCourseData.embedCodes; // Use the data
+            populateVideos(videoTitles, embedCodes);  // Populate videos with the retrieved data
+            scrollToTop();
+        }
+        
+        // Similar functions for fourth, fifth, and sixth course
+        function fourthcourse() {
+            document.body.innerHTML = '';
+            createHeader();
+            createStatusBar();  // You can pass the course name as an argument if needed
+            createFooter();
+            notificationIcon();
+            createVideosContainers();
+            var thirdCourseData = getFourthCourseData(); // Get data for the third course
+            var videoTitles = thirdCourseData.videoTitles; // Use the data
+            var embedCodes = thirdCourseData.embedCodes; // Use the data
+            populateVideos(videoTitles, embedCodes);  // Populate videos with the retrieved data
+            scrollToTop();
+        }
+        
+        function fifthcourse() {
+            document.body.innerHTML = '';
+            createHeader();
+            createStatusBar();  // You can pass the course name as an argument if needed
+            createFooter();
+            notificationIcon();
+            createVideosContainers();
+            var thirdCourseData = getFifthCourseData(); // Get data for the third course
+            var videoTitles = thirdCourseData.videoTitles; // Use the data
+            var embedCodes = thirdCourseData.embedCodes; // Use the data
+            populateVideos(videoTitles, embedCodes);  // Populate videos with the retrieved data
+            scrollToTop();
+        }
+        
+        function sixthcourse() {
+            document.body.innerHTML = '';
+            createHeader();
+            createStatusBar();  // You can pass the course name as an argument if needed
+            createFooter();
+            notificationIcon();
+            createVideosContainers();
+            var thirdCourseData = getSixthCourseData(); // Get data for the third course
+            var videoTitles = thirdCourseData.videoTitles; // Use the data
+            var embedCodes = thirdCourseData.embedCodes; // Use the data
+            populateVideos(videoTitles, embedCodes);  // Populate videos with the retrieved data
+            scrollToTop();
+        }
+        
+        // Function to handle sign-in logic
+       function signIn() {
+        scrollToTop();
+            // Pre-fill student ID
+            document.getElementById('studentId').value = 'mudasir@lms.vu.pk';
+
+            // Add event listener to Sign In button
+            document.getElementById('signInButton').addEventListener('click', function() {
+                // Get entered credentials
+                var studentId = document.getElementById('studentId').value;
+                var password = document.getElementById('password').value;
+
+                // Check if credentials match
+                if (studentId === 'mudasir@lms.vu.pk' && password === 'mudasir99') {
+                    // If credentials are correct, show the home page (phase 2)
+                    showHomePage(); // function calling
+                } else {
+                    // If credentials do not match, display an error message (optional)
+                    alert('Invalid credentials. Please try again.');
+                }
+            });
+        }
+        
+        
+        // Function to show the home page (phase 2)
+        function showHomePage() {
+            // Clear the body content and display the header
+            document.body.innerHTML = '';
+
+            createHeader();
+            createFooter();
+            notificationIcon();
+            createCourseContainer();
+            setupCourseButtonListeners();
+            scrollToTop();
+            
+
+            
+        }
+       
+        
+        // Call the signIn function 
+        signIn();
+    </script>
+</body>
+
+</html>
