@@ -38,8 +38,8 @@
             right: 20px;
             width: 40px;
             height: 40px;
-            background: url('file:///C:/PerfLogs/PerfLogs/message icon.gif') no-repeat center center;
-            background-size: cover;
+            background: url('message icon.gif') no-repeat center center;
+    		 background-size: cover;
             cursor: pointer;
             box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -124,7 +124,7 @@
 	    .banner {
             width: 100%;
             height: 130px;
-            background: url('file:///C:/PerfLogs/PerfLogs/lms.png') no-repeat center center;
+            background: url('lms.png') no-repeat center center;
             background-size: contain;
         }
 
@@ -174,8 +174,8 @@
         .bottom-image {
             width: 100%;
             height: 100px;
-            background: url('file:///C:/PerfLogs/PerfLogs/last%20image.jpeg') no-repeat center center;
-            background-size: contain;
+           background: url('last image.jpeg') no-repeat center center;
+      background-size: contain;
         }
         .videos-container {
             display: flex;
@@ -248,7 +248,7 @@
 <body>
     <div class="banner"></div>
     <div class="logo">
-        <img src="file:///C:/PerfLogs/PerfLogs/Logo-New.png" alt="Logo New">
+<img src="Logo-New.png" alt="Logo New">
     </div>
     <div class="login-form">
         <div class="input-box">
@@ -534,12 +534,12 @@ function createHeader() {
             for (var i = 0; i < courses.length; i++) {
                 var courseBox = document.createElement('div');
                 courseBox.className = 'course-box';
-        
-                var courseImage = document.createElement('img');
-                courseImage.src = 'file:///C:/PerfLogs/PerfLogs/' + courses[i].image;
-                courseImage.alt = courses[i].name + ' Image';
-                courseImage.className = 'course-image';
-                courseBox.appendChild(courseImage);
+        var courseImage = document.createElement('img');
+	courseImage.src = './' + courses[i].image;  // Assuming the images are in the root directory
+	courseImage.alt = courses[i].name + ' Image';
+	courseImage.className = 'course-image';
+	courseBox.appendChild(courseImage);
+
         
                 var courseName = document.createElement('div');
                 courseName.className = 'course-name';
